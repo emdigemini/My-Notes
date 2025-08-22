@@ -45,7 +45,20 @@ if(!list){
 }
 
 /** Toggle Dark Mode */
-let darkMode = false;
+let darkMode = JSON.parse(localStorage.getItem('darkmode'));
+
+if (darkMode) {
+  document.body.classList.add('dark-mode');
+  app.classList.add('slide-inDarkMode');
+  app.classList.remove('slide-inLightMode');
+  toggle.innerHTML = `&#127774; Light Mode`;
+} else {
+  document.body.classList.remove('dark-mode');
+  app.classList.add('slide-inLightMode');
+  app.classList.remove('slide-inDarkMode');
+  toggle.innerHTML = `&#127769; Dark Mode`;
+}
+
 toggle.addEventListener('click', () => {
   if(!darkMode){
     document.body.classList.add('dark-mode');
@@ -60,5 +73,5 @@ toggle.addEventListener('click', () => {
     darkMode = false;
     toggle.innerHTML = `&#127769; Dark Mode`
   }
+  localStorage.setItem('darkmode', JSON.stringify(darkMode));
 })
-
