@@ -5,7 +5,7 @@ const listId = params.get('id');
 const list = todoList.find(item => item.id === listId);
 const app = document.querySelector('.app');
 const toggle = document.querySelector('.toggle');
-const checkChar = document.querySelector('.checkBox');
+const textCount = document.querySelector('.textCounter');
 
 const renderNotes = () => {
   app.innerHTML = 
@@ -26,15 +26,16 @@ const renderNotes = () => {
   notepad.addEventListener('input', () => {
     list.text = notepad.innerText;
     localStorage.setItem('todoList', JSON.stringify(todoList));
+
     countCharAndWords();
   })
 }
 
 function countCharAndWords(){
-  console.log(list.text);
-  const charCount = list.text.length;
-  const wordCount = list.text.split(/\s+/).filter(word => word.length > 0).length;
-  console.log(charCount);
+  const text = list.text.trim();
+  const charCount = text.replace(/\s+/g, '').length;
+  const wordCount = text.length > 0 ? text.split(/\s+/).length : 0;
+  textCount.innerHTML = `Characters: ${charCount} &bull; Words: ${wordCount}`
 }
 
 if(!list){
