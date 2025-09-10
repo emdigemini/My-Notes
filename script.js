@@ -32,12 +32,21 @@ inputList.addEventListener('keydown', (k) => {
   }
 })
 
+let id = 0;
+function generateId() {
+  counter++;
+  return counter;
+}
+
+console.log(generateId()); // note-1
+console.log(generateId()); // note-2
+
 function createList(){
   overlay.classList.add('hidden');
   const list = inputList.value;
   todoList.push({
     title: list,
-    id: list,
+    id: `${list}-${generatedId()}`,
     text: `Click here to start typing your notes...`
   })
   inputList.value = '';
@@ -74,5 +83,6 @@ function renderList(){
       window.location.href = `list.html?id=${encodeURIComponent(listId)}`;
     })
   })
+
 
 }
